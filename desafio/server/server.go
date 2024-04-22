@@ -41,7 +41,7 @@ func main() {
 }
 
 func FetchDollarPriceHandler(w http.ResponseWriter, r *http.Request) {
-	ctxWithTimeout, cancel := context.WithTimeout(context.Background(), time.Millisecond*200)
+	ctxWithTimeout, cancel := context.WithTimeout(context.Background(), time.Second*200)
 	defer cancel()
 	data, err := clients.DollarQuotation(ctxWithTimeout)
 	select {
@@ -66,7 +66,7 @@ func FetchDollarPriceHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func saveData(data clients.Quotation) error {
-	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond*20)
+	ctx, cancel := context.WithTimeout(context.Background(), time.Second*20)
 	defer cancel()
 	stmt, err := sqliteDB.PrepareContext(ctx, "insert into quotation(dollar) values(?)")
 	if err != nil {
@@ -80,8 +80,8 @@ func saveData(data clients.Quotation) error {
 	defer stmt.Close()
 	var dq []byte
 	err = sqliteDB.QueryRow("select dollar->>'USDBRL' from quotation").Scan(&dq)
-	if err != nil {
-		return err
+	if err == nil {
+		log.Print("Dollar quotation saved")
 	}
 	return err
 }

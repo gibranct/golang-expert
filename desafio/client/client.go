@@ -33,7 +33,7 @@ func saveToFile(dollar *Dollar) error {
 }
 
 func main() {
-	ctxWithTimeout, cancel := context.WithTimeout(context.Background(), time.Millisecond*300)
+	ctxWithTimeout, cancel := context.WithTimeout(context.Background(), time.Duration(time.Millisecond*300))
 	defer cancel()
 	req, err := http.NewRequestWithContext(ctxWithTimeout, http.MethodGet, "http://localhost:8080/cotacao", nil)
 	if err != nil {
@@ -43,7 +43,8 @@ func main() {
 	select {
 	case <-ctxWithTimeout.Done():
 		log.Fatal("Failed to get dollar price in an decent time")
-	case <-time.After(time.Millisecond * 299):
+		return
+	default:
 		if err != nil {
 			log.Fatal(err)
 		}
