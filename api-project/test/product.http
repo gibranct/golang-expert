@@ -1,0 +1,46 @@
+POST http://localhost:8000/products
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTQwODk1MjgsInN1YiI6IjcyMGVjMWJhLTNiZGItNDUwNi1hNmQ4LTg0ZWE1YjIzN2VhNyJ9.ShPsA5EikNH1810Rd-iID105RL8AJh8B5cNfZinChFA
+
+{
+    "name": "My product",
+    "price": 200.0
+}
+
+###
+GET http://localhost:8000/products/eb7173f5-5b6b-4332-913d-f8f868255856
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE3MTQwODk1MjgsInN1YiI6IjcyMGVjMWJhLTNiZGItNDUwNi1hNmQ4LTg0ZWE1YjIzN2VhNyJ9.ShPsA5EikNH1810Rd-iID105RL8AJh8B5cNfZinChFA
+
+###
+PUT http://localhost:8000/products/eb7173f5-5b6b-4332-913d-f8f868255856
+Content-Type: application/json
+
+{
+    "name": "My product updated",
+    "price": 300.0
+}
+
+###
+DELETE http://localhost:8000/products/eb7173f5-5b6b-4332-913d-f8f868255856
+Content-Type: application/json
+
+
+###
+POST http://localhost:8000/users
+Content-Type: application/json
+
+{
+    "email": "j@mail.com",
+    "name": "John Doe",
+    "password": "123456"
+}
+
+###
+POST http://localhost:8000/login
+Content-Type: application/json
+
+{
+    "email": "j@mail.com",
+    "password": "123456"
+}
